@@ -25,7 +25,7 @@ public class ThreadedQueryService implements QueryService {
 	private Map<Integer, Future<Integer>> futures;
 	private Integer lastQueryId;
 	
-	ThreadedQueryService(){
+	ThreadedQueryService() throws RemoteException{
 		super();
 		this.executor = Executors.newCachedThreadPool(); // modify, if needed
 		this.lastQueryId = 0;

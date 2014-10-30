@@ -13,6 +13,9 @@ import shared.QueryState;
 
 /**
  * The main class of the RMI-client.
+ * Submit the target host as args[0] (e.g. hostname.domain.tld)
+ * Only provide a port if you do not use the default 1099.
+ * 
  * @author fredo
  *
  */
@@ -23,8 +26,12 @@ public class ClientMain {
 		HashMap<Integer, QueryProgress> submittedQueries = new HashMap<>();
 
 		try {
-			Registry registry = LocateRegistry.getRegistry();
+			String uri = args[0];
+			Registry registry = LocateRegistry.getRegistry(uri);
+			
+			System.out.println(registry.list());
 			QueryService queryService = (QueryService) registry.lookup("query");
+			System.out.println("Got server " + queryService);
 
 			// submit a bunch of queries
 
